@@ -7,7 +7,7 @@ function OTPVerification({setVerified}){
     const [error,setError]=useState('')
 
     const handleOtpClick=()=>{
-        if(typeof otp==='number'){
+        if(otp==='123456'){
             setVerified(true)
         }else{
             setError('Invalid OTP')
