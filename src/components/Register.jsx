@@ -1,13 +1,14 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react"
 import { Link } from "react-router-dom";
 import styles from '../styles/Reegister.module.css'
+import { useAuth } from "../context/AuthContext";
 
-function Register({setRegistered}){
+function Register(){
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     const [confirmPassword,setConfirmPassword]=useState('');
     const [error,setError]=useState('');
+    const {login}=useAuth()
 
     const validateEmail=(email)=>/\S+@\S+\.\S+/.test(email);
 
@@ -21,7 +22,8 @@ function Register({setRegistered}){
             return
         }
         localStorage.setItem('user',JSON.stringify({email,password}))
-        setRegistered(true)
+        login({email,password})
+        window.location.href='/login'
     }
 
     return (

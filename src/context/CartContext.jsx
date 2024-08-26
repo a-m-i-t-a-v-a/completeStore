@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useReducer } from "react"
+import { createContext, useContext, useReducer } from "react"
 
 const CartContext=createContext();
 
@@ -10,7 +10,10 @@ const initialState={
 function cartReducer(state,action){
     switch(action.type){
         case 'ADD_TO_CART':
-            return {...state,cartItems:[...state.cartItems,action.payload]}
+            return {
+                ...state,
+                cartItems:[...state.cartItems,action.payload]
+            }
         case 'REMOVE_FROM_CART':
             return {
                 ...state,
@@ -31,3 +34,6 @@ export const CartProvider=({children})=>{
         </CartContext.Provider>
     )
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useCart=()=>useContext(CartContext)

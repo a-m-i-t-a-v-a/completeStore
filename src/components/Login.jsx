@@ -1,16 +1,18 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react"
 import styles from '../styles/Login.module.css'
+import { useAuth } from "../context/AuthContext";
 
-function Login({setAuthenticated}){
+function Login(){
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     const [error,setError]=useState('');
+    const {login}=useAuth()
 
     const handleLogin=()=>{
         const user=JSON.parse(localStorage.getItem('user'))
         if(user && user.email===email && user.password===password){
-            setAuthenticated(true)
+            login(user)
+            window.location.href='/products'
         }else{
             setError('Invalid Credentials')
         }
